@@ -24,7 +24,7 @@ class _MessagesState extends State<Messages>{
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator(), widthFactor: 0.01, heightFactor: 0.01,);
         }
 
         return ListView(
