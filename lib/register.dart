@@ -57,7 +57,7 @@ class _RegisterState extends State<Register> {
                   decoration: InputDecoration(
                       helperText: 'PASSWORD'
                   ),
-                  validator: (val) => (val.length < 6 || val.contains(' ') || val.isEmpty)  ? 'Invalid Password Format'  : null, // We can add validation conditions we want here
+                  validator: (val) => (val.length < 6 || val.contains(' ') || val.isEmpty)  ? 'Invalid Password Format. make sure its length is 6+ and does not contain any empty spaces'  : null, // We can add validation conditions we want here
                   onChanged: (val){
                     setState(() => password = val);
                     //  _auth.setPw= password;
