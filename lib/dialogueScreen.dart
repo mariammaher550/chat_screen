@@ -63,44 +63,47 @@ class _DialogueState extends State<Dialogue>{
         ),
       ),
           //  MessageWidget(message: message, isMe: true),
-            Row(
-              children: <Widget> [
-                Expanded(
-                  child: TextField(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget> [
+                  Expanded(
+                    child: TextField(
 
-                    controller: _controller,
-                    textCapitalization: TextCapitalization.sentences,
-                    autocorrect: true,
-                    enableSuggestions: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[100],
-                      labelText: 'Type your message',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0),
-                        gapPadding: 10,
-                        borderRadius: BorderRadius.circular(25),
+                      controller: _controller,
+                      textCapitalization: TextCapitalization.sentences,
+                      autocorrect: true,
+                      enableSuggestions: true,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        labelText: 'Type your message',
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(width: 0),
+                          gapPadding: 10,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
                       ),
-                    ),
-                    onChanged: (value) => setState(() {
-                      message = value;
-                    }
+                      onChanged: (value) => setState(() {
+                        message = value;
+                      }
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: 20),
-                GestureDetector(
-                    onTap: message.trim().isEmpty ? null : sendMessage,
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:  Colors.blue,
-                      ),
-                      child: Icon(Icons.send, color: Colors.white),
-                    )
-                )
-              ],
+                  SizedBox(width: 20),
+                  GestureDetector(
+                      onTap: message.trim().isEmpty ? null : sendMessage,
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color:  Colors.blue,
+                        ),
+                        child: Icon(Icons.send, color: Colors.white),
+                      )
+                  )
+                ],
+              ),
             ),
       ],
           ),
