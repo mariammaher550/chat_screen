@@ -18,76 +18,78 @@ class _RegisterState extends State<Register> {
   String error = '';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Register Page'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Login'),
-            onPressed: (){
-              widget.toggleView();
-            },
-          )
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 20.0),
-                TextFormField(
-                  decoration: InputDecoration(
-                      helperText: 'EMAIL'
-                  ),
-                  validator: (val) {
-                    if (!val.contains('@') || val.isEmpty) return 'Invalid Email Format';
-                    else if(email_exists(val)) return 'Email already in use';
-                    else return null;
-                  },
-                  onChanged: (val){
-                    setState(() => email = val);
-                  },
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      helperText: 'PASSWORD'
-                  ),
-                  validator: (val) => (val.length < 6 || val.contains(' ') || val.isEmpty)  ? 'Invalid Password Format. make sure its length is 6+ and does not contain any empty spaces'  : null, // We can add validation conditions we want here
-                  onChanged: (val){
-                    setState(() => password = val);
-                    //  _auth.setPw= password;
-                  },
-                ),
-                SizedBox(height: 20.0),
-                RaisedButton(
-                  child: Text(
-                    'SIGN UP',
-                  ),
-                  onPressed: () async{
-                    if(_formKey.currentState.validate()){
-                      dynamic result = await registerWithEmailAndPassword(email, password, context);
-                      if (result != '') {
-                        setState(() {
-                          error = result;
-                        });
-                      }
-                    }
-                    add_data(email);
-
-                  },
-                ),
-                SizedBox(height: 12.0),
-                Text(
-                  error,
-                  style: TextStyle(color: Colors.red, fontSize: 14.0),
-                )
-              ],
+    return Expanded(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Register Page'),
+          actions: <Widget>[
+            FlatButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('Login'),
+              onPressed: (){
+                widget.toggleView();
+              },
             )
+          ],
+        ),
+        body: Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        helperText: 'EMAIL'
+                    ),
+                    validator: (val) {
+                      if (!val.contains('@') || val.isEmpty) return 'Invalid Email Format';
+                      else if(email_exists(val)) return 'Email already in use';
+                      else return null;
+                    },
+                    onChanged: (val){
+                      setState(() => email = val);
+                    },
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        helperText: 'PASSWORD'
+                    ),
+                    validator: (val) => (val.length < 6 || val.contains(' ') || val.isEmpty)  ? 'Invalid Password Format. make sure its length is 6+ and does not contain any empty spaces'  : null, // We can add validation conditions we want here
+                    onChanged: (val){
+                      setState(() => password = val);
+                      //  _auth.setPw= password;
+                    },
+                  ),
+                  SizedBox(height: 20.0),
+                  RaisedButton(
+                    child: Text(
+                      'SIGN UP',
+                    ),
+                    onPressed: () async{
+                      if(_formKey.currentState.validate()){
+                        dynamic result = await registerWithEmailAndPassword(email, password, context);
+                        if (result != '') {
+                          setState(() {
+                            error = result;
+                          });
+                        }
+                      }
+                      add_data(email);
+
+                    },
+                  ),
+                  SizedBox(height: 12.0),
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  )
+                ],
+              )
+          ),
         ),
       ),
     );
